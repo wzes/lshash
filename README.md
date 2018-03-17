@@ -2,7 +2,8 @@
 
 
 #### use
-- enter the lshash
-- python3.x setup.py install
-
-- congratulate! you can use it by python3!
+```
+# enter the lshash
+# python3.x setup.py install
+# congratulate! you can use it by python3!
+```
