@@ -1,9 +1,13 @@
 # lshash for python3.x
 
 
-#### use
+#### USE
+
+- Enter the lshash folder
+
+- Run
 ```
-# enter the lshash
-# python3.x setup.py install
-# congratulate! you can use it by python3!
+$ python setup.py install
 ```
+- Congratulate! You can use it by python3!
+
