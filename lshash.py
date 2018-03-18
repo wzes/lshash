@@ -184,23 +184,27 @@ class LSHash(object):
 
         :param input_point:
             A list, or tuple, or numpy ndarray object that contains numbers
-            only. The dimension needs to be 1 * `input_dim`.
+            only. The dimension needs to be 1 or 2 * `input_dim`.
             This object will be converted to Python tuple and stored in the
             selected storage.
         :param extra_data:
             (optional) Needs to be a JSON-serializable object: list, dicts and
             basic types such as strings and integers.
         """
+        dim = 0
 
         if isinstance(input_point, np.ndarray):
+            dim = input_point.ndim
             input_point = input_point.tolist()
+        elif isinstance(input_point, list):
+            dim = np.array(input_point).ndim
 
         if extra_data:
             value = (tuple(input_point), extra_data)
         else:
             value = tuple(input_point)
 
-        if np.array(input_point).ndim == 2:
+        if dim == 2:
             for i in range(len(input_point)):
                 for j, table in enumerate(self.hash_tables):
                     table.append_val(self._hash(self.uniform_planes[j], input_point[i]),
