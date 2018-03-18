@@ -200,15 +200,9 @@ class LSHash(object):
         else:
             value = tuple(input_point)
 
-        if np.array(input_point).ndim == 2:
-            for i in range(len(input_point)):
-                for j, table in enumerate(self.hash_tables):
-                    table.append_val(self._hash(self.uniform_planes[j], input_point[i]),
-                                     tuple(value[i]))
-        else:
-            for i, table in enumerate(self.hash_tables):
-                table.append_val(self._hash(self.uniform_planes[i], input_point),
-                                 value)
+        for i, table in enumerate(self.hash_tables):
+            table.append_val(self._hash(self.uniform_planes[i], input_point),
+                             value)
 
     def query(self, query_point, num_results=None, distance_func=None):
         """ Takes `query_point` which is either a tuple or a list of numbers,
