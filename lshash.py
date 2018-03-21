@@ -7,6 +7,7 @@
 import os
 import json
 import numpy as np
+import scipy.spatial.distance as dist
 
 from storage import storage
 
@@ -263,6 +264,8 @@ class LSHash(object):
                 d_func = LSHash.cosine_dist
             elif distance_func == "l1norm":
                 d_func = LSHash.l1norm_dist
+            elif distance_func == "jaccard":
+                d_func = LSHash.jaccard_dist
             else:
                 raise ValueError("The distance function name is invalid.")
 
@@ -305,6 +308,11 @@ class LSHash(object):
     @staticmethod
     def l1norm_dist(x, y):
         return sum(abs(x - y))
+
+    @staticmethod
+    def jaccard_dist(x, y):
+        matV = np.array([x, y])
+        return dist.pdist(matV, 'jaccard')[0]
 
     @staticmethod
     def cosine_dist(x, y):
